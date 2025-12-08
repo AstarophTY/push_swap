@@ -11,7 +11,7 @@ OBJS := $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(BASE_NAME)))
 DEPS := $(addprefix $(DEPS_DIR)/, $(addsuffix .d, $(BASE_NAME)))
 
 CFLAGS := -Wall -Werror -Wextra -g3 # Retirer le g3 a la fin
-CPP_FLAGS := -Iincludes -Ilibs/libft/includes
+CPP_FLAGS := -Iincludes -I$(LIBS_DIR)/libft/includes
 DEPS_FLAGS := -MP -MD -MF
 
 LIBFT := $(LIBS_DIR)/libft/libft.a
@@ -40,4 +40,6 @@ re: fclean all
 $(LIBFT):
 	$(MAKE) -C $(LIBS_DIR)/libft/
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re $(LIBFT)
+
+-include $(DEPS)
