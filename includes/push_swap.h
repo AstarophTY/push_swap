@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 13:19:51 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/08 17:54:05 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/08 18:28:08 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,9 @@
 
 # include <stdbool.h>
 # include "libft.h"
+
+t_list	*create_list(char **array);
+int		is_nb(int argc, char **argv);
+char	**get_nb(char **argv);
 
 #endif

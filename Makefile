@@ -4,9 +4,9 @@ DEPS_DIR := .deps
 LIBS_DIR := libs
 
 NAME := push_swap
-BASE_NAME := main create_list
+BASE_NAME := main create_list parsing
 
-VPATH := $(SRCS_DIR):$(SRCS_DIR)/list
+VPATH := $(SRCS_DIR):$(SRCS_DIR)/list:$(SRCS_DIR)/parsing
 SRCS := $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(BASE_NAME)))
 OBJS := $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(BASE_NAME)))
 DEPS := $(addprefix $(DEPS_DIR)/, $(addsuffix .d, $(BASE_NAME)))
