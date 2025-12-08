@@ -35,6 +35,7 @@
 *.i*86
 *.x86_64
 *.hex
+push_swap
 
 # Debug files
 *.dSYM/
@@ -53,3 +54,7 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Custom directory
+.build/*
+.deps/*
