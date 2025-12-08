@@ -1,6 +1,7 @@
 OBJS_DIR := .objs
 SRCS_DIR := srcs
 DEPS_DIR := .deps
+LIBS_DIR := libs
 
 NAME := push_swap
 BASE_NAME := main
@@ -10,13 +11,15 @@ OBJS := $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(BASE_NAME)))
 DEPS := $(addprefix $(DEPS_DIR)/, $(addsuffix .d, $(BASE_NAME)))
 
 CFLAGS := -Wall -Werror -Wextra -g3 # Retirer le g3 a la fin
-CPP_FLAGS := -Iincludes
+CPP_FLAGS := -Iincludes -Ilibs/libft/includes
 DEPS_FLAGS := -MP -MD -MF
+
+LIBFT := $(LIBS_DIR)/libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c Makefile | $(OBJS_DIR) $(DEPS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ $(CPP_FLAGS) $(DEPS_FLAGS) $(DEPS_DIR)/$*.d
@@ -26,10 +29,15 @@ $(OBJS_DIR) $(DEPS_DIR):
 
 clean:
 	$(RM) -r $(OBJS_DIR) $(DEPS_DIR)
+	$(MAKE) -C $(LIBS_DIR)/libft clean
 
 fclean: clean
 	$(RM) $(NAME)
+	$(MAKE) -C $(LIBS_DIR)/libft fclean
 
 re: fclean all
+
+$(LIBFT):
+	$(MAKE) -C $(LIBS_DIR)/libft/
 
 .PHONY: all clean fclean re
