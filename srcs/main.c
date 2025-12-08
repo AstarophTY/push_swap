@@ -21,13 +21,18 @@ void	ft_putnbr(int n)
 int	main(int argc, char **argv)
 {
 	t_list	*lst;
+	t_list	*lst1;
 	char	**strs;
 
+	lst1 = NULL;
 	if (is_nb(argc, argv) == 0)
 		return (0);
 	strs = get_nb(argv);
 	lst = create_list(strs);
+	push(&lst1, &lst);
 	ft_lstiter(lst, &ft_putnbr);
+	printf("------\n");
+	ft_lstiter(lst1, &ft_putnbr);
 	ft_lstclear(&lst);
-	return (0);
+	return (42);
 }
