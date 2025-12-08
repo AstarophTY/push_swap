@@ -6,7 +6,7 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:30:15 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/11/06 10:49:20 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/08 17:57:10 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*fill_word(const char *s, char c)
 	return (word);
 }
 
-static char	**free_split(char **strs)
+char	**free_split(char **strs)
 {
 	size_t	i;
 

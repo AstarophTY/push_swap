@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 12:24:48 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/08 16:17:14 by sgil--de         ###   ########.fr       */
+/*   Created: 2025/12/08 15:45:46 by sgil--de          #+#    #+#             */
+/*   Updated: 2025/12/08 18:05:53 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIST_H
+# define LIST_H
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
-{
-	if (!lst || !new)
-		return ;
-	if (*lst)
-		(*lst)->prev = new;
-	new->next = *lst;
-	*lst = new;
-	new->prev = NULL;
-}
+# include "libft.h"
+
+t_list	*create_list(char **array);
+
+#endif

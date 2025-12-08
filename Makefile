@@ -4,8 +4,9 @@ DEPS_DIR := .deps
 LIBS_DIR := libs
 
 NAME := push_swap
-BASE_NAME := main
+BASE_NAME := main create_list
 
+VPATH := $(SRCS_DIR):$(SRCS_DIR)/list
 SRCS := $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(BASE_NAME)))
 OBJS := $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(BASE_NAME)))
 DEPS := $(addprefix $(DEPS_DIR)/, $(addsuffix .d, $(BASE_NAME)))
@@ -21,7 +22,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c Makefile | $(OBJS_DIR) $(DEPS_DIR)
+$(OBJS_DIR)/%.o: %.c Makefile | $(OBJS_DIR) $(DEPS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ $(CPP_FLAGS) $(DEPS_FLAGS) $(DEPS_DIR)/$*.d
 
 $(OBJS_DIR) $(DEPS_DIR):
