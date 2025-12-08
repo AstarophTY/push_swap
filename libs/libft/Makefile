@@ -20,6 +20,7 @@ BASE_NAME := ft_isalpha \
 	  		 ft_tolower \
 	  		 ft_strrchr \
 	  		 ft_strncmp \
+			 ft_strcmp \
 	  		 ft_memchr \
 	  		 ft_memcmp \
 	  		 ft_strnstr \
