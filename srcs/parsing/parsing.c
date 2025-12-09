@@ -14,11 +14,18 @@
 
 static bool	check_digit(char *str)
 {
-	while (*str)
+	int	i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (false);
+	while (str[i])
 	{
-		if (!ft_isdigit((int)*str))
+		if (!ft_isdigit((int)str[i]))
 			return (false);
-		str++;
+		i++;
 	}
 	return (true);
 }

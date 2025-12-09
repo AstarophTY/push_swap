@@ -34,4 +34,7 @@ bool	multi_reverse_rotate(t_list **lst1, t_list **lst2);
 bool	multi_rotate(t_list **lst1, t_list **lst2);
 bool	multi_swap(t_list *lst1, t_list *lst2);
 
+bool	is_sorted(t_list *lst);
+bool	radix_sort(t_list **lst);
+
 #endif

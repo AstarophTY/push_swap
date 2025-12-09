@@ -6,7 +6,7 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:40:40 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/09 10:51:22 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:31:21 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 bool	rotate(t_list **lst, char stack)
 {
-	t_list	*temp;
+	t_list	*first;
+	t_list	*last;
 
-	temp = ft_lstlast(*lst);
-	if (!temp || temp == *lst)
+	if (!lst || !*lst || !(*lst)->next)
 		return (false);
-	if (temp->prev)
-		temp->prev->next = NULL;
-	temp->prev = NULL;
-	temp->next = *lst;
-	*lst = temp;
+	first = *lst;
+	last = ft_lstlast(*lst);
+	*lst = first->next;
+	(*lst)->prev = NULL;
+	first->next = NULL;
+	first->prev = last;
+	last->next = first;
 	if (stack)
 		ft_printf("r%c\n", stack);
 	return (true);
