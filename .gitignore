@@ -58,3 +58,4 @@ dkms.conf
 # Custom directory
 .build/*
 .deps/*
+push_swap_visualizer/
