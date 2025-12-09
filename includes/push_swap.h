@@ -13,10 +13,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-// a enlever
-# include <stdio.h>
-//-----------
-
 # include <stdbool.h>
 # include "libft.h"
 
@@ -24,7 +20,8 @@ t_list	*create_list(char **array);
 t_list	*bubble_sort(t_list *received);
 int		is_nb(int argc, char **argv);
 char	**get_nb(char **argv);
-double 	calculate_complexity(t_list *received);
+double	calculate_complexity(t_list *received);
+void	init_index(t_list *lst);
 
 bool	swap(t_list *lst, char stack);
 bool	push(t_list **received, t_list **send, char stack);
@@ -35,6 +32,6 @@ bool	multi_rotate(t_list **lst1, t_list **lst2);
 bool	multi_swap(t_list *lst1, t_list *lst2);
 
 bool	is_sorted(t_list *lst);
-bool	radix_sort(t_list **lst);
+void	radix_sort(t_list **lst);
 
 #endif

@@ -30,7 +30,7 @@ bool	multi_swap(t_list *lst1, t_list *lst2)
 {
 	if (swap(lst1, 0) && swap(lst2, 0))
 	{
-		printf("ss\n");
+		ft_printf("ss\n");
 		return (true);
 	}
 	return (false);

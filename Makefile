@@ -4,7 +4,7 @@ DEPS_DIR := .deps
 LIBS_DIR := libs
 
 NAME := push_swap
-BASE_NAME := main create_list parsing push swap rotate algorithme radix_sort bubble_sort
+BASE_NAME := main create_list parsing push swap rotate algorithme radix_sort bubble_sort utils
 
 VPATH := $(SRCS_DIR):$(SRCS_DIR)/list:$(SRCS_DIR)/parsing:$(SRCS_DIR)/algorithme
 SRCS := $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(BASE_NAME)))

@@ -6,7 +6,7 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:40:40 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/09 14:31:21 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/09 16:49:03 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	multi_reverse_rotate(t_list **lst1, t_list **lst2)
 {
 	if (reverse_rotate(lst1, 0) && reverse_rotate(lst2, 0))
 	{
-		printf("rrr\n");
+		ft_printf("rrr\n");
 		return (true);
 	}
 	return (false);
@@ -63,7 +63,7 @@ bool	multi_rotate(t_list **lst1, t_list **lst2)
 {
 	if (rotate(lst1, 0) && rotate(lst2, 0))
 	{
-		printf("rr\n");
+		ft_printf("rr\n");
 		return (true);
 	}
 	return (false);

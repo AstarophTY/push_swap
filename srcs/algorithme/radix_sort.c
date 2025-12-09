@@ -6,93 +6,102 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:33:26 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/09 14:28:37 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/09 16:46:54 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	is_sorted(t_list *lst)
+static t_list	*find_min_unindexed(t_list *lst)
 {
-	t_list	*temp;
+	t_list	*tmp;
+	t_list	*min_node;
 
-	temp = lst;
-	while (temp && temp->next)
+	min_node = NULL;
+	tmp = lst;
+	while (tmp)
 	{
-		if (temp && temp->next && temp->content > temp->next->content)
-			return (false);
-		temp = temp->next;
+		if (tmp->index == -1)
+		{
+			if (!min_node || tmp->content < min_node->content)
+				min_node = tmp;
+		}
+		tmp = tmp->next;
 	}
-	return (true);
+	return (min_node);
 }
 
-static void	normalize_values(t_list *lst)
+static void	normalize_stack(t_list *lst)
 {
-	t_list	*current;
-	t_list	*compare;
+	t_list	*min_node;
 	int		index;
 
-	current = lst;
-	while (current)
+	init_index(lst);
+	index = 0;
+	while (1)
 	{
-		index = 0;
-		compare = lst;
-		while (compare)
-		{
-			if (compare->content < current->content)
-				index++;
-			compare = compare->next;
-		}
-		current->index = index;
-		current = current->next;
+		min_node = find_min_unindexed(lst);
+		if (!min_node)
+			break ;
+		min_node->index = index++;
 	}
 }
 
-size_t	get_max_bits(t_list *lst)
+static size_t	get_max_bits(t_list *lst)
 {
 	int		max;
 	size_t	bits;
 
-	if (!lst)
-		return (0);
-	max = lst->index;
-	bits = 0;
+	max = 0;
 	while (lst)
 	{
 		if (lst->index > max)
 			max = lst->index;
 		lst = lst->next;
 	}
+	bits = 0;
 	while ((max >> bits) != 0)
 		bits++;
 	return (bits);
 }
 
-bool	radix_sort(t_list **lst)
+static void	radix_iteration(t_list **stack_a, t_list **stack_b,
+				size_t bit_pos, size_t size)
 {
-	size_t	size;
-	size_t	max_bits;
-	t_list	*stack_b;
-	size_t	i;
 	size_t	j;
 	int		num;
 
-	stack_b = NULL;
-	size = ft_lstsize(*lst);
-	normalize_values(*lst);
-	max_bits = get_max_bits(*lst);
-	for (i = 0; i < max_bits; ++i)
+	j = 0;
+	while (j < size)
 	{
-		for (j = 0; j < size; ++j)
-		{
-			num = (*lst)->index;
-			if ((num >> i) & 1)
-				rotate(lst, 'a');
-			else
-				push(&stack_b, lst, 'b');
-		}
-		while (stack_b)
-			push(lst, &stack_b, 'a');
+		num = (*stack_a)->index;
+		if ((num >> bit_pos) & 1)
+			rotate(stack_a, 'a');
+		else
+			push(stack_b, stack_a, 'b');
+		j++;
 	}
-	return (true);
+}
+
+void	radix_sort(t_list **stack_a)
+{
+	t_list	*stack_b;
+	size_t	size;
+	size_t	max_bits;
+	size_t	i;
+
+	stack_b = NULL;
+	if (!stack_a || !*stack_a || is_sorted(*stack_a))
+		return ;
+	size = ft_lstsize(*stack_a);
+	normalize_stack(*stack_a);
+	max_bits = get_max_bits(*stack_a);
+	i = 0;
+	while (i < max_bits)
+	{
+		radix_iteration(stack_a, &stack_b, i, size);
+		while (stack_b)
+			push(stack_a, &stack_b, 'a');
+		i++;
+	}
 }
