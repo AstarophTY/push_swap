@@ -27,7 +27,8 @@ int	main(int argc, char **argv)
 		return (0);
 	strs = get_nb(argv);
 	lst = create_list(strs);
-	reverse_rotate(&lst, 'a');
+	// reverse_rotate(&lst, 'a');
+	lst = bubble_sort(lst);
 	ft_lstiter(lst, &ft_putnbr1);
 	ft_lstclear(&lst);
 	return (0);

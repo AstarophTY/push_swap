@@ -21,6 +21,7 @@
 # include "libft.h"
 
 t_list	*create_list(char **array);
+t_list	*bubble_sort(t_list *received);
 int		is_nb(int argc, char **argv);
 char	**get_nb(char **argv);
 double 	calculate_complexity(t_list *received);
