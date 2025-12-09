@@ -3,7 +3,7 @@ OBJS_DIR := .objs
 DEPS_DIR := .deps
 
 NAME := libft.a
-VPATH := srcs:srcs/str:srcs/mem:srcs/link_lst:srcs/is:srcs/io
+VPATH := srcs:srcs/str:srcs/mem:srcs/link_lst:srcs/is:srcs/io:srcs/printf
 BASE_NAME := ft_isalpha \
 	  		 ft_isdigit \
 	  		 ft_isalnum \
@@ -47,7 +47,13 @@ BASE_NAME := ft_isalpha \
 	  		 ft_lstdelone \
 	  		 ft_lstclear \
 	  		 ft_lstiter \
-	  		 ft_lstmap
+	  		 ft_lstmap \
+			 ft_printf \
+			 ft_putaddr \
+			 ft_putchar \
+			 ft_puthex \
+			 ft_putnbr \
+			 ft_putstr
 
 SRCS := $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(BASE_NAME)))
 OBJS := $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(BASE_NAME)))

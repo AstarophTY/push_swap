@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-bool    push(t_list **received, t_list **send)
+bool    push(t_list **received, t_list **send, char stack)
 {
     t_list *temp;
 
@@ -27,5 +27,7 @@ bool    push(t_list **received, t_list **send)
         (*received)->prev = temp;
     temp->prev = NULL;
     *received = temp;
+    if (stack)
+		ft_printf("s%c\n", stack);
     return (true);
 }

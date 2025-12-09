@@ -24,7 +24,12 @@ t_list	*create_list(char **array);
 int		is_nb(int argc, char **argv);
 char	**get_nb(char **argv);
 
-bool	swap(t_list *lst);
-bool	push(t_list **received, t_list **send);
+bool	swap(t_list *lst, char stack);
+bool	push(t_list **received, t_list **send, char stack);
+bool	rotate(t_list **lst, char stack);
+bool	reverse_rotate(t_list **lst, char stack);
+bool	multi_reverse_rotate(t_list **lst1, t_list **lst2);
+bool	multi_rotate(t_list **lst1, t_list **lst2);
+bool	multi_swap(t_list *lst1, t_list *lst2);
 
 #endif
