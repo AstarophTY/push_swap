@@ -23,6 +23,7 @@
 t_list	*create_list(char **array);
 int		is_nb(int argc, char **argv);
 char	**get_nb(char **argv);
+double 	calculate_complexity(t_list *received);
 
 bool	swap(t_list *lst);
 bool	push(t_list **received, t_list **send);
