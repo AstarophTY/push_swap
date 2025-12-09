@@ -6,7 +6,7 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:29:25 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/09 14:36:21 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/09 17:01:43 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,30 @@
 
 t_list	*bubble_sort(t_list *received)
 {
-	t_list 		*tmp;
-	bool		swapped;
+	bool	swapped;
+	int		i;
 
+	i = 0;
 	if (!received)
         return (NULL);
 	swapped = true;
 	while (swapped)
 	{
 		swapped = false;
-		tmp = received;
-		while (tmp && tmp->next)
+		while (i < ft_lstsize(received))
 		{
-			if (tmp->content > tmp->next->content)
+			if (received->content > received->next->content)
 			{
-				swap(tmp, 'a');
+				swap(received, 'a');
 				swapped = true;
 			}
-			tmp=tmp->next;
+			reverse_rotate(&received, 'a');
+			i++;
+		}
+		while (i > 1)
+		{
+			rotate(&received, 'a');
+			i--;
 		}
 	}
 	return (received);
