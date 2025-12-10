@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	strs = get_nb(argv);
 	lst = create_list(strs);
 	if (!is_sorted(lst))
-		bubble_sort(lst);
+		radix_sort(&lst);
 	ft_lstclear(&lst);
 	return (0);
 }

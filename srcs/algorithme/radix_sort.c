@@ -6,41 +6,40 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:33:26 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/09 16:46:54 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/10 10:16:13 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_list	*find_min_unindexed(t_list *lst)
+static t_list	*find_min(t_list *lst)
 {
-	t_list	*tmp;
+	t_list	*temp;
 	t_list	*min_node;
 
 	min_node = NULL;
-	tmp = lst;
-	while (tmp)
+	temp = lst;
+	while (temp)
 	{
-		if (tmp->index == -1)
+		if (temp->index == -1)
 		{
-			if (!min_node || tmp->content < min_node->content)
-				min_node = tmp;
+			if (!min_node || temp->content < min_node->content)
+				min_node = temp;
 		}
-		tmp = tmp->next;
+		temp = temp->next;
 	}
 	return (min_node);
 }
 
-static void	normalize_stack(t_list *lst)
+static void	index_list(t_list *lst)
 {
 	t_list	*min_node;
 	int		index;
 
-	init_index(lst);
 	index = 0;
 	while (1)
 	{
-		min_node = find_min_unindexed(lst);
+		min_node = find_min(lst);
 		if (!min_node)
 			break ;
 		min_node->index = index++;
@@ -65,8 +64,7 @@ static size_t	get_max_bits(t_list *lst)
 	return (bits);
 }
 
-static void	radix_iteration(t_list **stack_a, t_list **stack_b,
-				size_t bit_pos, size_t size)
+static void	radix_iteration(t_list **lst, t_list **stack_b, size_t bit_pos, size_t size)
 {
 	size_t	j;
 	int		num;
@@ -74,16 +72,16 @@ static void	radix_iteration(t_list **stack_a, t_list **stack_b,
 	j = 0;
 	while (j < size)
 	{
-		num = (*stack_a)->index;
+		num = (*lst)->index;
 		if ((num >> bit_pos) & 1)
-			rotate(stack_a, 'a');
+			rotate(lst, 'a');
 		else
-			push(stack_b, stack_a, 'b');
+			push(stack_b, lst, 'b');
 		j++;
 	}
 }
 
-void	radix_sort(t_list **stack_a)
+void	radix_sort(t_list **lst)
 {
 	t_list	*stack_b;
 	size_t	size;
@@ -91,17 +89,17 @@ void	radix_sort(t_list **stack_a)
 	size_t	i;
 
 	stack_b = NULL;
-	if (!stack_a || !*stack_a || is_sorted(*stack_a))
+	if (!lst || !*lst || is_sorted(*lst))
 		return ;
-	size = ft_lstsize(*stack_a);
-	normalize_stack(*stack_a);
-	max_bits = get_max_bits(*stack_a);
+	size = ft_lstsize(*lst);
+	index_list(*lst);
+	max_bits = get_max_bits(*lst);
 	i = 0;
 	while (i < max_bits)
 	{
-		radix_iteration(stack_a, &stack_b, i, size);
+		radix_iteration(lst, &stack_b, i, size);
 		while (stack_b)
-			push(stack_a, &stack_b, 'a');
+			push(lst, &stack_b, 'a');
 		i++;
 	}
 }
