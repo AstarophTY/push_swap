@@ -6,7 +6,7 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 10:30:00 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/10 16:08:46 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:20:30 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ t_list	*selection_sort(t_list **received)
 		min = tmp2->content;
 		min = ft_min(min, tmp2);
 		while ((*received)->content != min)
-			reverse_rotate(received, 'a');
-		push(&tmp, received, 'a');
+			rotate(received, 'a');
+		push(&tmp, received, 'b');
 		i++;
 	}
 	while (tmp)
-		push(received, &tmp, 'b');
-	return (tmp);
+		push(received, &tmp, 'a');
+	return (*received);
 }
