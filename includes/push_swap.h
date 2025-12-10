@@ -21,6 +21,7 @@ t_list	*bubble_sort(t_list *received);
 int		is_nb(int argc, char **argv);
 char	**get_nb(char **argv);
 double	calculate_complexity(t_list *received);
+t_list	*insertion_sort(t_list **received);
 
 bool	swap(t_list *lst, char stack);
 bool	push(t_list **received, t_list **send, char stack);
