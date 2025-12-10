@@ -21,11 +21,12 @@ t_list	*bubble_sort(t_list *received);
 int		is_nb(int argc, char **argv);
 char	**get_nb(char **argv);
 double	calculate_complexity(t_list *received);
-t_list	*insertion_sort(t_list **received);
 void	index_list(t_list *lst);
 bool	lst_contains_index(t_list *lst, int min, int max);
 int		find_max_index(t_list *lst);
 int		get_position(t_list *lst, int target_index);
+t_list	*selection_sort(t_list **received);
+
 
 bool	swap(t_list *lst, char stack);
 bool	push(t_list **received, t_list **send, char stack);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insertion_sort.c                                   :+:      :+:    :+:   */
+/*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 10:30:00 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/10 14:40:39 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/10 16:08:46 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_min(int min, t_list *tmp2)
 	return (min);
 }
 
-t_list	*insertion_sort(t_list **received)
+t_list	*selection_sort(t_list **received)
 {
 	int		min;
 	t_list	*tmp;
@@ -41,84 +41,10 @@ t_list	*insertion_sort(t_list **received)
 		min = ft_min(min, tmp2);
 		while ((*received)->content != min)
 			reverse_rotate(received, 'a');
-		push(&tmp, received, 'b');
+		push(&tmp, received, 'a');
 		i++;
 	}
 	while (tmp)
-		push(received, &tmp, 'a');
+		push(received, &tmp, 'b');
 	return (tmp);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
