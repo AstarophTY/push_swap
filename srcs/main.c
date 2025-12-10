@@ -12,17 +12,28 @@
 
 #include "push_swap.h"
 
+void	ft_putnbr1(int nb)
+{
+	ft_printf("%d\n", nb);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*lst;
 	char	**strs;
+	int		flag;
 
-	if (is_nb(argc, argv) == 0)
-		return (0);
+	flag = is_nb(argc, argv);
+	if (flag == 0)
+	{
+		ft_putendl_fd("Error", 2);
+		return (1);
+	}
 	strs = get_nb(argv);
 	lst = create_list(strs);
 	if (!is_sorted(lst))
 		radix_sort(&lst);
+	ft_lstiter(lst, &ft_putnbr1);
 	ft_lstclear(&lst);
 	return (0);
 }

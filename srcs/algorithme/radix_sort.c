@@ -6,45 +6,11 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 12:33:26 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/10 10:16:13 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/10 14:55:06 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static t_list	*find_min(t_list *lst)
-{
-	t_list	*temp;
-	t_list	*min_node;
-
-	min_node = NULL;
-	temp = lst;
-	while (temp)
-	{
-		if (temp->index == -1)
-		{
-			if (!min_node || temp->content < min_node->content)
-				min_node = temp;
-		}
-		temp = temp->next;
-	}
-	return (min_node);
-}
-
-static void	index_list(t_list *lst)
-{
-	t_list	*min_node;
-	int		index;
-
-	index = 0;
-	while (1)
-	{
-		min_node = find_min(lst);
-		if (!min_node)
-			break ;
-		min_node->index = index++;
-	}
-}
 
 static size_t	get_max_bits(t_list *lst)
 {

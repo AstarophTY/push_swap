@@ -6,7 +6,7 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:15:14 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/09 16:45:39 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/10 11:04:46 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,24 @@ double calculate_complexity(t_list *received)
 	return (mistake / total_pairs);
 }
 
-void	choose_algorithme(int algo, t_list *received)
-{
-	double complexity;
+// void	choose_algorithme(int algo, t_list **received)
+// {
+// 	double complexity;
 
-	complexity = calculate_complexity(received);
-	if (algo == 1)
-		bubble_sort(received);
-	// else if (algo == 2)
-	// 	//algo 2 (medium)
-	// 	break;
-	// else if (algo == 3)
-	// 	//algo 3 (complex)
-	// 	break;
-	// else if (algo == 4)
-	// {
-	// 	if (complexity < 0.2)
-	// 		//algo 1 (simple)
-	// 	else if (complexity >= 0.2 && complexity < 0.5)
-	// 		//algo 2 (medium)
-	// 	else if (complexity >= 0.5)
-	// 		//algo 3 (complex)
-	// }
-}
+// 	complexity = calculate_complexity(received);
+// 	if (algo == 1)
+// 		bubble_sort(received);
+// 	// else if (algo == 2)
+// 	// 	// algo 2 (medium)
+// 	else if (algo == 3)
+// 		radix_sort(received);
+// 	else if (algo == 4)
+// 	{
+// 		// if (complexity < 0.2)
+// 		// 	//algo 1 (simple)
+// 		// else if (complexity >= 0.2 && complexity < 0.5)
+// 		// 	//algo 2 (medium)
+// 		// else if (complexity >= 0.5)
+// 		// 	//algo 3 (complex)
+// 	}
+// }
