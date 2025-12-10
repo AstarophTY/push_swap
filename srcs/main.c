@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	strs = get_nb(argv);
 	lst = create_list(strs);
 	if (!is_sorted(lst))
-		temp = insertion_sort(&lst);
+		temp = selection_sort(&lst);
 	ft_lstiter(lst, &ft_putnbr1);
 	// ft_lstiter(temp, &ft_putnbr1);
 	ft_lstclear(&lst);
