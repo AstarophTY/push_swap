@@ -16,17 +16,32 @@
 # include <stdbool.h>
 # include "libft.h"
 
+typedef enum e_flag
+{
+	simple = 1,
+	medium = 2,
+	complexe = 3,
+	adaptative = 4,
+}	t_flag;
+
+typedef struct s_parsing
+{
+	bool	bench_state;
+	bool	is_onestring;
+	int		str_index;
+	t_flag	flag;
+	char	**item_parse;
+}	t_parsing;
+
 t_list	*create_list(char **array);
 t_list	*bubble_sort(t_list *received);
-int		is_nb(int argc, char **argv);
-char	**get_nb(char **argv);
 double	calculate_complexity(t_list *received);
 void	index_list(t_list *lst);
 bool	lst_contains_index(t_list *lst, int min, int max);
 int		find_max_index(t_list *lst);
 int		get_position(t_list *lst, int target_index);
 t_list	*selection_sort(t_list **received);
-
+bool	parsing(t_parsing *parsing, char **strs, int count);
 
 bool	swap(t_list *lst, char stack);
 bool	push(t_list **received, t_list **send, char stack);

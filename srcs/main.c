@@ -12,27 +12,25 @@
 
 #include "push_swap.h"
 
-void	ft_putnbr1(int nb)
-{
-	ft_printf("%d\n", nb);
-}
-
 int	main(int argc, char **argv)
 {	
-	t_list	*lst;
-	char	**strs;
-	int		flag;
+	t_list		*lst;
+	t_parsing	*parsing_val;
+	char		**strs;
 
-	flag = is_nb(argc, argv);
-	if (flag == 0)
+	parsing_val = NULL;
+	if (argc < 2 || !parsing(parsing_val, &argv[1], argc - 1))
 	{
+		if (parsing_val->item_parse)
+			free_split(parsing_val->item_parse);
+		free(parsing_val);
 		ft_putendl_fd("Error", 2);
 		return (1);
 	}
-	strs = get_nb(argv);
-	lst = create_list(strs);
-	if (!is_sorted(lst))
-		chunk_sort(&lst);
-	ft_lstclear(&lst);
+	// lst = create_list(parsing_val->item_parse);
+	// if (!is_sorted(lst))
+		// chunk_sort(&lst);
+	// ft_lstclear(&lst);
+	free(parsing_val);
 	return (0);
 }

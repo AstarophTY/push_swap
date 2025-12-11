@@ -11,107 +11,58 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-static bool	check_digit(char *str)
+bool	is_onestring(char **strs, int size, t_parsing *parsing_val)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (false);
-	while (str[i])
+	while (i < size && strs[i])
 	{
-		if (!ft_isdigit((int)str[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static int	verification_flag(char *str)
-{
-	int	flag;
-
-	flag = 0;
-	if (!ft_strcmp(str, "--simple"))
-		flag = 1;
-	else if (!ft_strcmp(str, "--medium"))
-		flag = 2;
-	else if (!ft_strcmp(str, "--complex"))
-		flag = 3;
-	else if (!ft_strcmp(str, "--adaptive"))
-		flag = 4;
-	return (flag);
-}
-
-static bool	array_contain(char *to_find, char **array, int size)
-{
-	int	i;
-
-	i = 1;
-	while (i < size)
-	{
-		if (array[i] && ft_strcmp(array[i], to_find) == 0)
-			return (true);
+		j = 0;
+		while (strs[i][j])
+		{
+			if (ft_isspace(strs[i][j]))
+			{
+				parsing_val->str_index = i;
+				return (true);
+			}
+			j++;
+		}
 		i++;
 	}
 	return (false);
 }
 
-int	is_nb(int argc, char **argv)
+bool	only_digit(char *str)
 {
-	char	**strs;
-	int		i;
-	int		temp;
-
-	i = 1;
-	temp = 4;
-	if (argc <= 1)
-		return (0);
-	strs = ft_calloc(argc, sizeof(char *));
-	if (!strs)
-		return (0);
-	while (argv[i] && i < argc && temp)
+	while (*str)
 	{
-		if (verification_flag(argv[i]))
-			temp = verification_flag(argv[i]);
-		else if (check_digit(argv[i]) && !array_contain(argv[i], strs, argc))
-			strs[i] = argv[i];
-		else
-			temp = 0;
-		i++;
+		if (!ft_isspace(*str) || !ft_isdigit(*str))
+			return (false);
+		str++;
 	}
-	free(strs);
-	return (temp);
+	return (false);
 }
 
-char	**get_nb(char **argv)
+char	**parse_strs(char **strs, int size, t_parsing *parsing_val)
 {
-	size_t	size;
-	size_t	i;
-	char	**strs;
+	if (parsing_val->is_onestring && only_digit(strs[parsing_val->str_index]))
+		return (ft_split(strs[parsing_val->str_index], ' '));
+	
+	
+}
 
-	i = 0;
-	size = 0;
-	while (argv[i])
-	{
-		if (check_digit(argv[i]))
-			size++;
-		i++;
-	}
-	strs = ft_calloc(size + 1, sizeof(char *));
-	if (!strs)
-		return (NULL);
-	i = 0;
-	size = 0;
-	while (argv[i])
-	{
-		if (check_digit(argv[i]))
-			strs[size++] = ft_strdup(argv[i]);
-		i++;
-	}
-	strs[size] = NULL;
-	return (strs);
+bool	parsing(t_parsing *parsing_val, char **strs, int size)
+{
+	parsing_val = ft_calloc(sizeof(t_parsing), 1);
+	if (!parsing_val)
+		return (false);
+	parsing_val->is_onestring = is_onestring(strs, size, parsing_val);
+	parsing_val->item_parse = parse_strs(strs, size, parsing_val);
+	if (parsing_val->item_parse)
+		return (false);
+	return (true);
 }

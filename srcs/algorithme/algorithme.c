@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithme.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:15:14 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/11 10:33:28 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/11 10:46:23 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	choose_algorithme(int algo, t_list **received)
 {
 	double complexity;
 
-	complexity = calculate_complexity(received);
+	complexity = calculate_complexity(*received);
 	if (algo == 1)
 		selection_sort(received);
 	else if (algo == 2)

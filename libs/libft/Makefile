@@ -8,6 +8,7 @@ BASE_NAME := ft_isalpha \
 	  		 ft_isdigit \
 	  		 ft_isalnum \
 	  		 ft_isascii \
+			 ft_isspace \
 	  		 ft_isprint \
 	  		 ft_strlen \
 	  		 ft_memset \
