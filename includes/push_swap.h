@@ -24,6 +24,23 @@ typedef enum e_flag
 	adaptive = 4,
 }	t_flag;
 
+typedef struct s_bench
+{
+	int		sa;
+	int		sb;
+	int		ss;
+	int		pa;
+	int		pb;
+	int		ra;
+	int		rb;
+	int		rr;
+	int		rra;
+	int		rrb;
+	int		rrr;
+	int		total;
+	bool	enabled;
+}	t_bench;
+
 typedef struct s_parsing
 {
 	bool	bench_state;
@@ -36,12 +53,14 @@ typedef struct s_parsing
 t_list	*create_list(char **array);
 t_list	*bubble_sort(t_list *received);
 double	calculate_complexity(t_list *received);
+double	calculate_disorder(t_list *lst);
 void	index_list(t_list *lst);
 bool	lst_contains_index(t_list *lst, int min, int max);
 int		find_max_index(t_list *lst);
 int		get_position(t_list *lst, int target_index);
 t_list	*selection_sort(t_list **received);
 bool	parsing(t_parsing *parsing, char **strs, int count);
+char	**append_to_array(char **array, char *str);
 
 bool	swap(t_list *lst, char stack);
 bool	push(t_list **received, t_list **send, char stack);
@@ -54,5 +73,10 @@ bool	multi_swap(t_list *lst1, t_list *lst2);
 bool	is_sorted(t_list *lst);
 void	radix_sort(t_list **lst);
 void	chunk_sort(t_list **lst);
+
+extern t_bench	g_bench;
+
+void	init_bench(bool enabled);
+void	print_bench(t_flag flag, int size, double disorder);
 
 #endif

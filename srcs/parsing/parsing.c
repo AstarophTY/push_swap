@@ -6,101 +6,50 @@
 /*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 17:54:17 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/08 17:57:50 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/11 17:57:50 by tmalpert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-bool	is_onestring(char **strs, int size, t_parsing *parsing_val)
+static bool	is_valid_number(char *str)
 {
 	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size && strs[i])
-	{
-		j = 0;
-		while (strs[i][j])
-		{
-			if (ft_isspace(strs[i][j]))
-			{
-				parsing_val->str_index = i;
-				return (true);
-			}
-			j++;
-		}
-		i++;
-	}
-	return (false);
-}
-
-bool	only_digit(char *str, bool space_too)
-{
-	bool	has_digit;
 
 	if (!str || !*str)
 		return (false);
-	has_digit = false;
-	while (*str)
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (false);
+	while (str[i])
 	{
-		while (*str && ft_isspace(*str) && space_too)
-			str++;
-		if (*str == '-' || *str == '+')
-		{
-			str++;
-			if (!*str || !ft_isdigit(*str))
-				return (false);
-		}
-		if (ft_isdigit(*str))
-		{
-			has_digit = true;
-			while (*str && ft_isdigit(*str))
-				str++;
-		}
-		else if (*str)
+		if (!ft_isdigit(str[i]))
 			return (false);
+		i++;
 	}
-	return (has_digit);
+	return (true);
 }
 
-char	**parse_strs(char **strs, int size, t_parsing *parsing_val)
+static bool	is_flag(char *str)
 {
-	int	i;
-	int	j;
-
-	if (parsing_val->is_onestring && only_digit(strs[parsing_val->str_index], true))
-		return (ft_split(strs[parsing_val->str_index], ' '));
-	i = 0;
-	size = 0;
-	while (strs[i])
-	{
-		if (only_digit(strs[i], false))
-			size++;
-		i++;
-	}
-	parsing_val->item_parse = ft_calloc(size + 1, sizeof(char *));
-	if (!parsing_val->item_parse)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (strs[i])
-	{
-		if (only_digit(strs[i], false))
-			parsing_val->item_parse[j++] = ft_strdup(strs[i]);
-		i++;
-	}
-	parsing_val->item_parse[j] = NULL;
-	return (parsing_val->item_parse);
+	if (!str)
+		return (false);
+	if (!ft_strcmp(str, "--simple") || !ft_strcmp(str, "--medium")
+		|| !ft_strcmp(str, "--complex") || !ft_strcmp(str, "--adaptive")
+		|| !ft_strcmp(str, "--bench"))
+		return (true);
+	return (false);
 }
 
-
-void	verification_flag(char **strs, t_parsing *parsing_val)
+static void	process_flags(char **strs, t_parsing *parsing_val)
 {
 	int	i;
 
 	i = 0;
+	parsing_val->flag = adaptive;
+	parsing_val->bench_state = false;
 	while (strs[i])
 	{
 		if (!ft_strcmp(strs[i], "--simple"))
@@ -117,16 +66,59 @@ void	verification_flag(char **strs, t_parsing *parsing_val)
 	}
 }
 
+static char	**merge_all_args(char **strs, int size)
+{
+	char	**result;
+	char	**temp;
+	char	**old_result;
+	int		i;
+	int		j;
+
+	result = NULL;
+	i = 0;
+	while (i < size)
+	{
+		if (is_flag(strs[i]))
+		{
+			i++;
+			continue;
+		}
+		temp = ft_split(strs[i], ' ');
+		if (!temp)
+			return (free_split(result));
+		j = 0;
+		while (temp[j])
+		{
+			if (is_valid_number(temp[j]))
+			{
+				old_result = result;
+				result = append_to_array(result, temp[j]);
+				if (!result)
+				{
+					free_split(temp);
+					return (free_split(old_result));
+				}
+			}
+			j++;
+		}
+		free_split(temp);
+		i++;
+	}
+	return (result);
+}
+
 bool	parsing(t_parsing *parsing_val, char **strs, int size)
 {
 	if (!parsing_val)
 		return (false);
-	parsing_val->is_onestring = is_onestring(strs, size, parsing_val);
-	parsing_val->item_parse = parse_strs(strs, size, parsing_val);
-	verification_flag(strs, parsing_val);
-	if (!parsing_val->item_parse)
+	process_flags(strs, parsing_val);
+	parsing_val->item_parse = merge_all_args(strs, size);
+	if (!parsing_val->item_parse || !parsing_val->item_parse[0])
+	{
+		if (parsing_val->item_parse)
+			free_split(parsing_val->item_parse);
+		parsing_val->item_parse = NULL;
 		return (false);
-	for (size_t i = 0; parsing_val->item_parse[i]; i++)
-		printf("%s\n", parsing_val->item_parse[i]);
+	}
 	return (true);
 }

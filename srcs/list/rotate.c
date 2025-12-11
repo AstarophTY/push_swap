@@ -6,7 +6,7 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:40:40 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/09 16:49:03 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:03:56 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,14 @@ bool	rotate(t_list **lst, char stack)
 	first->prev = last;
 	last->next = first;
 	if (stack)
+	{
 		ft_printf("r%c\n", stack);
+		if (stack == 'a')
+			g_bench.ra++;
+		else
+			g_bench.rb++;
+		g_bench.total++;
+	}
 	return (true);
 }
 
@@ -45,7 +52,14 @@ bool	reverse_rotate(t_list **lst, char stack)
 	*lst = temp;
 	(*lst)->prev = NULL;
 	if (stack)
+	{
 		ft_printf("rr%c\n", stack);
+		if (stack == 'a')
+			g_bench.rra++;
+		else
+			g_bench.rrb++;
+		g_bench.total++;
+	}
 	return (true);
 }
 
@@ -54,6 +68,8 @@ bool	multi_reverse_rotate(t_list **lst1, t_list **lst2)
 	if (reverse_rotate(lst1, 0) && reverse_rotate(lst2, 0))
 	{
 		ft_printf("rrr\n");
+		g_bench.rrr++;
+		g_bench.total++;
 		return (true);
 	}
 	return (false);
@@ -64,6 +80,8 @@ bool	multi_rotate(t_list **lst1, t_list **lst2)
 	if (rotate(lst1, 0) && rotate(lst2, 0))
 	{
 		ft_printf("rr\n");
+		g_bench.rr++;
+		g_bench.total++;
 		return (true);
 	}
 	return (false);

@@ -6,7 +6,7 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 16:46:17 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/10 12:33:33 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/11 17:41:42 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,32 @@ void	index_list(t_list *lst)
 			break ;
 		min_node->index = index++;
 	}
+}
+
+double	calculate_disorder(t_list *lst)
+{
+	int		inversions;
+	int		size;
+	int		max_inversions;
+	t_list	*current;
+	t_list	*runner;
+
+	inversions = 0;
+	size = ft_lstsize(lst);
+	current = lst;
+	while (current)
+	{
+		runner = current->next;
+		while (runner)
+		{
+			if (current->content > runner->content)
+				inversions++;
+			runner = runner->next;
+		}
+		current = current->next;
+	}
+	max_inversions = (size * (size - 1)) / 2;
+	if (max_inversions == 0)
+		return (0.0);
+	return ((double)inversions / max_inversions * 100.0);
 }

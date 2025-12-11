@@ -29,6 +29,13 @@ bool push(t_list **received, t_list **send, char stack)
     *received = temp;
     if (send)
     if (stack)
-        ft_printf("p%c\n", stack);
+	{
+		ft_printf("p%c\n", stack);
+		if (stack == 'a')
+			g_bench.pa++;
+		else
+			g_bench.pb++;
+		g_bench.total++;
+	}
     return (true);
 }
