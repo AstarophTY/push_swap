@@ -18,12 +18,13 @@ int	main(int argc, char **argv)
 	t_parsing	*parsing_val;
 	char		**strs;
 
-	parsing_val = NULL;
-	if (argc < 2 || !parsing(parsing_val, &argv[1], argc - 1))
+	parsing_val = ft_calloc(1, sizeof(t_parsing));
+	if (argc < 2 || !parsing_val || !parsing(parsing_val, &argv[1], argc - 1))
 	{
-		if (parsing_val->item_parse)
+		if (parsing_val && parsing_val->item_parse)
 			free_split(parsing_val->item_parse);
-		free(parsing_val);
+		if (parsing_val)
+			free(parsing_val);
 		ft_putendl_fd("Error", 2);
 		return (1);
 	}
@@ -31,6 +32,8 @@ int	main(int argc, char **argv)
 	// if (!is_sorted(lst))
 		// chunk_sort(&lst);
 	// ft_lstclear(&lst);
+	if (parsing_val->item_parse)
+		free_split(parsing_val->item_parse);
 	free(parsing_val);
 	return (0);
 }

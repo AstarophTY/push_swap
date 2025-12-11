@@ -20,8 +20,8 @@ typedef enum e_flag
 {
 	simple = 1,
 	medium = 2,
-	complexe = 3,
-	adaptative = 4,
+	complex = 3,
+	adaptive = 4,
 }	t_flag;
 
 typedef struct s_parsing
