@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-bool	swap(t_list *lst, char stack)
+bool	swap(t_list *lst, char stack, t_bench *bench)
 {
-	int temp;
+	int	temp;
 
 	if (!lst || !lst->next)
 		return (false);
@@ -23,23 +23,25 @@ bool	swap(t_list *lst, char stack)
 	lst->next->content = temp;
 	if (stack)
 	{
-		ft_printf("s%c\n", stack);
+		if (!bench->enabled)
+			ft_printf("s%c\n", stack);
 		if (stack == 'a')
-			g_bench.sa++;
+			bench->sa++;
 		else
-			g_bench.sb++;
-		g_bench.total++;
+			bench->sb++;
+		bench->total++;
 	}
 	return (true);
 }
 
-bool	multi_swap(t_list *lst1, t_list *lst2)
+bool	multi_swap(t_list *lst1, t_list *lst2, t_bench *bench)
 {
-	if (swap(lst1, 0) && swap(lst2, 0))
+	if (swap(lst1, 0, bench) && swap(lst2, 0, bench))
 	{
-		ft_printf("ss\n");
-		g_bench.ss++;
-		g_bench.total++;
+		if (!bench->enabled)
+			ft_printf("ss\n");
+		bench->ss++;
+		bench->total++;
 		return (true);
 	}
 	return (false);

@@ -6,13 +6,13 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:40:40 by sgil--de          #+#    #+#             */
-/*   Updated: 2025/12/11 19:03:56 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:11:33 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	rotate(t_list **lst, char stack)
+bool	rotate(t_list **lst, char stack, t_bench *bench)
 {
 	t_list	*first;
 	t_list	*last;
@@ -28,17 +28,18 @@ bool	rotate(t_list **lst, char stack)
 	last->next = first;
 	if (stack)
 	{
-		ft_printf("r%c\n", stack);
+		if (!bench->enabled)
+			ft_printf("r%c\n", stack);
 		if (stack == 'a')
-			g_bench.ra++;
+			bench->ra++;
 		else
-			g_bench.rb++;
-		g_bench.total++;
+			bench->rb++;
+		bench->total++;
 	}
 	return (true);
 }
 
-bool	reverse_rotate(t_list **lst, char stack)
+bool	reverse_rotate(t_list **lst, char stack, t_bench *bench)
 {
 	t_list	*temp;
 
@@ -53,35 +54,38 @@ bool	reverse_rotate(t_list **lst, char stack)
 	(*lst)->prev = NULL;
 	if (stack)
 	{
-		ft_printf("rr%c\n", stack);
+		if (!bench->enabled)
+			ft_printf("rr%c\n", stack);
 		if (stack == 'a')
-			g_bench.rra++;
+			bench->rra++;
 		else
-			g_bench.rrb++;
-		g_bench.total++;
+			bench->rrb++;
+		bench->total++;
 	}
 	return (true);
 }
 
-bool	multi_reverse_rotate(t_list **lst1, t_list **lst2)
+bool	multi_reverse_rotate(t_list **lst1, t_list **lst2, t_bench *bench)
 {
-	if (reverse_rotate(lst1, 0) && reverse_rotate(lst2, 0))
+	if (reverse_rotate(lst1, 0, bench) && reverse_rotate(lst2, 0, bench))
 	{
-		ft_printf("rrr\n");
-		g_bench.rrr++;
-		g_bench.total++;
+		if (!bench->enabled)
+			ft_printf("rrr\n");
+		bench->rrr++;
+		bench->total++;
 		return (true);
 	}
 	return (false);
 }
 
-bool	multi_rotate(t_list **lst1, t_list **lst2)
+bool	multi_rotate(t_list **lst1, t_list **lst2, t_bench *bench)
 {
-	if (rotate(lst1, 0) && rotate(lst2, 0))
+	if (rotate(lst1, 0, bench) && rotate(lst2, 0, bench))
 	{
-		ft_printf("rr\n");
-		g_bench.rr++;
-		g_bench.total++;
+		if (!bench->enabled)
+			ft_printf("rr\n");
+		bench->rr++;
+		bench->total++;
 		return (true);
 	}
 	return (false);

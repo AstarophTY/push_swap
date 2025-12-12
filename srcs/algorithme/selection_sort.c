@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   selection_sort.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmalpert <tmalpert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 10:30:00 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/10 17:20:30 by tmalpert         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:01:47 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_min(int min, t_list *tmp2)
 	return (min);
 }
 
-t_list	*selection_sort(t_list **received)
+t_list	*selection_sort(t_list **received, t_bench *bench)
 {
 	int		min;
 	t_list	*tmp;
@@ -40,11 +40,11 @@ t_list	*selection_sort(t_list **received)
 		min = tmp2->content;
 		min = ft_min(min, tmp2);
 		while ((*received)->content != min)
-			rotate(received, 'a');
-		push(&tmp, received, 'b');
+			rotate(received, 'a', bench);
+		push(&tmp, received, 'b', bench);
 		i++;
 	}
 	while (tmp)
-		push(received, &tmp, 'a');
+		push(received, &tmp, 'a', bench);
 	return (*received);
 }

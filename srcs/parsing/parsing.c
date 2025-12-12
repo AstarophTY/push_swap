@@ -66,45 +66,33 @@ static void	process_flags(char **strs, t_parsing *parsing_val)
 	}
 }
 
-static char	**merge_all_args(char **strs, int size)
+static char	**merge_all_args(char **n_strs)
 {
-	char	**result;
-	char	**temp;
-	char	**old_result;
-	int		i;
-	int		j;
+	size_t	size;
+	size_t	i;
+	char	**strs;
 
-	result = NULL;
 	i = 0;
-	while (i < size)
+	size = 0;
+	while (n_strs[i])
 	{
-		if (is_flag(strs[i]))
-		{
-			i++;
-			continue;
-		}
-		temp = ft_split(strs[i], ' ');
-		if (!temp)
-			return (free_split(result));
-		j = 0;
-		while (temp[j])
-		{
-			if (is_valid_number(temp[j]))
-			{
-				old_result = result;
-				result = append_to_array(result, temp[j]);
-				if (!result)
-				{
-					free_split(temp);
-					return (free_split(old_result));
-				}
-			}
-			j++;
-		}
-		free_split(temp);
+		if (is_valid_number(n_strs[i]))
+			size++;
 		i++;
 	}
-	return (result);
+	strs = ft_calloc(size + 1, sizeof(char *));
+	if (!strs)
+		return (NULL);
+	i = 0;
+	size = 0;
+	while (n_strs[i])
+	{
+		if (is_valid_number(n_strs[i]))
+			strs[size++] = ft_strdup(n_strs[i]);
+		i++;
+	}
+	strs[size] = NULL;
+	return (strs);
 }
 
 bool	parsing(t_parsing *parsing_val, char **strs, int size)
@@ -112,7 +100,7 @@ bool	parsing(t_parsing *parsing_val, char **strs, int size)
 	if (!parsing_val)
 		return (false);
 	process_flags(strs, parsing_val);
-	parsing_val->item_parse = merge_all_args(strs, size);
+	parsing_val->item_parse = merge_all_args(strs);
 	if (!parsing_val->item_parse || !parsing_val->item_parse[0])
 	{
 		if (parsing_val->item_parse)

@@ -51,32 +51,28 @@ typedef struct s_parsing
 }	t_parsing;
 
 t_list	*create_list(char **array);
-t_list	*bubble_sort(t_list *received);
 double	calculate_complexity(t_list *received);
-double	calculate_disorder(t_list *lst);
 void	index_list(t_list *lst);
 bool	lst_contains_index(t_list *lst, int min, int max);
 int		find_max_index(t_list *lst);
 int		get_position(t_list *lst, int target_index);
-t_list	*selection_sort(t_list **received);
+t_list	*selection_sort(t_list **received, t_bench *bench);
 bool	parsing(t_parsing *parsing, char **strs, int count);
-char	**append_to_array(char **array, char *str);
+void	choose_algorithme(t_flag a, t_list **r, double d, t_bench *b);
 
-bool	swap(t_list *lst, char stack);
-bool	push(t_list **received, t_list **send, char stack);
-bool	rotate(t_list **lst, char stack);
-bool	reverse_rotate(t_list **lst, char stack);
-bool	multi_reverse_rotate(t_list **lst1, t_list **lst2);
-bool	multi_rotate(t_list **lst1, t_list **lst2);
-bool	multi_swap(t_list *lst1, t_list *lst2);
+bool	swap(t_list *lst, char stack, t_bench *bench);
+bool	push(t_list **received, t_list **send, char stack, t_bench *bench);
+bool	rotate(t_list **lst, char stack, t_bench *bench);
+bool	reverse_rotate(t_list **lst, char stack, t_bench *bench);
+bool	multi_reverse_rotate(t_list **lst1, t_list **lst2, t_bench *bench);
+bool	multi_rotate(t_list **lst1, t_list **lst2, t_bench *bench);
+bool	multi_swap(t_list *lst1, t_list *lst2, t_bench *bench);
 
 bool	is_sorted(t_list *lst);
-void	radix_sort(t_list **lst);
-void	chunk_sort(t_list **lst);
+void	radix_sort(t_list **lst, t_bench *bench);
+void	chunk_sort(t_list **lst, t_bench *bench);
 
-extern t_bench	g_bench;
-
-void	init_bench(bool enabled);
-void	print_bench(t_flag flag, int size, double disorder);
+void	init_bench(bool enabled, t_bench *bench);
+void	print_bench(t_flag flag, double disorder, t_bench *bench);
 
 #endif

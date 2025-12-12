@@ -6,13 +6,13 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:15:14 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/11 10:46:23 by sgil--de         ###   ########.fr       */
+/*   Updated: 2025/12/12 11:13:18 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-double calculate_complexity(t_list *received)
+double	calculate_complexity(t_list *received)
 {
 	double		mistake;
 	double		total_pairs;
@@ -24,7 +24,8 @@ double calculate_complexity(t_list *received)
 	tmp = received;
 	while (tmp)
 	{
-		tmp2 = tmp->next;
+		if (tmp->next)
+			tmp2 = tmp->next;
 		while (tmp2)
 		{
 			total_pairs++;
@@ -37,24 +38,21 @@ double calculate_complexity(t_list *received)
 	return (mistake / total_pairs);
 }
 
-void	choose_algorithme(int algo, t_list **received)
+void	choose_algorithme(t_flag algo, t_list **lst, double diso, t_bench *bch)
 {
-	double complexity;
-
-	complexity = calculate_complexity(*received);
-	if (algo == 1)
-		selection_sort(received);
-	else if (algo == 2)
-		chunk_sort(received);
-	else if (algo == 3)
-		radix_sort(received);
-	else if (algo == 4)
+	if (algo == simple)
+		selection_sort(lst, bch);
+	else if (algo == medium)
+		chunk_sort(lst, bch);
+	else if (algo == complex)
+		radix_sort(lst, bch);
+	else if (algo == adaptive)
 	{
-		if (complexity < 0.2)
-			selection_sort(received);
-		else if (complexity >= 0.2 && complexity < 0.5)
-			chunk_sort(received);
-		else if (complexity >= 0.5)
-			radix_sort(received);
+		if (diso < 20)
+			selection_sort(lst, bch);
+		else if (diso >= 20 && diso < 50)
+			chunk_sort(lst, bch);
+		else if (diso >= 50)
+			radix_sort(lst, bch);
 	}
 }

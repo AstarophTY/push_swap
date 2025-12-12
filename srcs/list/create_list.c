@@ -28,7 +28,7 @@ t_list	*create_list(char **array)
 	i = 0;
 	head = NULL;
 	while (array[i])
-	{	
+	{
 		node = ft_lstnew(atoi(array[i]));
 		if (!node)
 			return (free_null(head, array));
