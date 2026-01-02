@@ -56,8 +56,9 @@ dkms.conf
 *.dwo
 
 # Custom directory
-.build/
+.objs/
 .deps/
 push_swap_visualizer/
 checker_linux
 .vscode/
+args.txt
