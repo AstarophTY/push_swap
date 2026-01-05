@@ -57,7 +57,7 @@ bool	lst_contains_index(t_list *lst, int min, int max);
 int		find_max_index(t_list *lst);
 int		get_position(t_list *lst, int target_index);
 t_list	*selection_sort(t_list **received, t_bench *bench);
-bool	parsing(t_parsing *parsing, char **strs, int count);
+bool	parsing(t_parsing *parsing, char **strs);
 void	choose_algorithme(t_flag a, t_list **r, double d, t_bench *b);
 
 bool	swap(t_list *lst, char stack, t_bench *bench);

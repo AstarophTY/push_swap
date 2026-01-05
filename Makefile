@@ -11,7 +11,7 @@ SRCS := $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(BASE_NAME)))
 OBJS := $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(BASE_NAME)))
 DEPS := $(addprefix $(DEPS_DIR)/, $(addsuffix .d, $(BASE_NAME)))
 
-CFLAGS := -g3 # Retirer le g3 a la fin -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra # Retirer le g3 a la fin -Wall -Werror -Wextra
 CPP_FLAGS := -Iincludes -I$(LIBS_DIR)/libft/includes
 DEPS_FLAGS := -MP -MD -MF
 

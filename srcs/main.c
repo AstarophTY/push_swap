@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	parsing_val = ft_calloc(1, sizeof(t_parsing));
-	if (!parsing_val || !parsing(parsing_val, &argv[1], argc - 1))
+	if (!parsing_val || !parsing(parsing_val, &argv[1]))
 		return (error(&parsing_val, 2));
 	lst = create_list(parsing_val->item_parse);
 	parsing_val->item_parse = NULL;

@@ -32,17 +32,6 @@ static bool	is_valid_number(char *str)
 	return (true);
 }
 
-static bool	is_flag(char *str)
-{
-	if (!str)
-		return (false);
-	if (!ft_strcmp(str, "--simple") || !ft_strcmp(str, "--medium")
-		|| !ft_strcmp(str, "--complex") || !ft_strcmp(str, "--adaptive")
-		|| !ft_strcmp(str, "--bench"))
-		return (true);
-	return (false);
-}
-
 static void	process_flags(char **strs, t_parsing *parsing_val)
 {
 	int	i;
@@ -95,7 +84,7 @@ static char	**merge_all_args(char **n_strs)
 	return (strs);
 }
 
-bool	parsing(t_parsing *parsing_val, char **strs, int size)
+bool	parsing(t_parsing *parsing_val, char **strs)
 {
 	if (!parsing_val)
 		return (false);
