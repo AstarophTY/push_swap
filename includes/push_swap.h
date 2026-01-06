@@ -59,6 +59,7 @@ int		get_position(t_list *lst, int target_index);
 t_list	*selection_sort(t_list **received, t_bench *bench);
 bool	parsing(t_parsing *parsing, char **strs);
 void	choose_algorithme(t_flag a, t_list **r, double d, t_bench *b);
+bool	has_duplicates(t_list *lst);
 
 bool	swap(t_list *lst, char stack, t_bench *bench);
 bool	push(t_list **received, t_list **send, char stack, t_bench *bench);

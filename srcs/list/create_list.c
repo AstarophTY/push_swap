@@ -12,10 +12,9 @@
 
 #include "libft.h"
 
-static t_list	*free_null(t_list *head, char **strs)
+static t_list	*free_null(t_list *head)
 {
 	ft_lstclear(&head);
-	free_split(strs);
 	return (NULL);
 }
 
@@ -31,10 +30,9 @@ t_list	*create_list(char **array)
 	{
 		node = ft_lstnew(atoi(array[i]));
 		if (!node)
-			return (free_null(head, array));
+			return (free_null(head));
 		ft_lstadd_back(&head, node);
 		i++;
 	}
-	free_split(array);
 	return (head);
 }

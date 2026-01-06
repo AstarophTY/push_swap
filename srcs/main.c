@@ -26,26 +26,30 @@ static void	clean(t_parsing *parsing_val, t_list *lst)
 
 static int	error(t_parsing **parsing_val, int error_id)
 {
-	clean(*parsing_val, NULL);
+	if (parsing_val && *parsing_val)
+	{
+		clean(*parsing_val, NULL);
+		*parsing_val = NULL;
+	}
 	ft_putendl_fd("Error", 2);
 	return (error_id);
 }
 
-static int	run_sort(t_parsing *parsing_val, t_list *lst)
+static int	run_sort(t_parsing *parsing_val, t_list **lst)
 {
 	t_bench	bench;
 	double	disorder;
 	size_t	size;
 
 	init_bench(parsing_val->bench_state, &bench);
-	size = ft_lstsize(lst);
-	disorder = calculate_complexity(lst) * 100;
-	if (!is_sorted(lst))
+	size = ft_lstsize(*lst);
+	disorder = calculate_complexity(*lst) * 100;
+	if (!is_sorted(*lst))
 	{
 		if (size <= 3)
-			sort_small(&lst, &bench);
+			sort_small(lst, &bench);
 		else
-			choose_algorithme(parsing_val->flag, &lst, disorder, &bench);
+			choose_algorithme(parsing_val->flag, lst, disorder, &bench);
 	}
 	if (parsing_val->bench_state)
 		print_bench(parsing_val->flag, disorder, &bench);
@@ -63,10 +67,15 @@ int	main(int argc, char **argv)
 	if (!parsing_val || !parsing(parsing_val, &argv[1]))
 		return (error(&parsing_val, 2));
 	lst = create_list(parsing_val->item_parse);
-	parsing_val->item_parse = NULL;
 	if (!lst)
 		return (error(&parsing_val, 3));
-	run_sort(parsing_val, lst);
+	if (has_duplicates(lst))
+	{
+		clean(parsing_val, lst);
+		ft_putendl_fd("Error", 2);
+		return (1);
+	}
+	run_sort(parsing_val, &lst);
 	clean(parsing_val, lst);
 	return (0);
 }

@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!build_stack(&stack_a, &argv[1]))
 		return (print_error(&stack_a, &stack_b));
-	init_bench(true, &bench);
+	init_bench(false, &bench);
 	if (!read_operations(&stack_a, &stack_b, &bench))
 		return (print_error(&stack_a, &stack_b));
 	if (is_sorted(stack_a) && !stack_b)

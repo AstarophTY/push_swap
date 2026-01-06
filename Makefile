@@ -4,7 +4,7 @@ DEPS_DIR := .deps
 LIBS_DIR := libs
 
 NAME := push_swap
-BASE_NAME := main create_list parsing push swap rotate algorithme radix_sort utils chunk_sort chunk_utils selection_sort bench small_sort
+BASE_NAME := main create_list parsing push swap rotate algorithme radix_sort utils chunk_sort chunk_utils selection_sort bench small_sort checker_utils
 BONUS_NAME := checker
 BONUS_BASE := checker checker_parsing checker_ops checker_utils push swap rotate utils bench
 

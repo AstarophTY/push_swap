@@ -6,7 +6,7 @@
 /*   By: sgil--de <sgil--de@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:15:14 by tmalpert          #+#    #+#             */
-/*   Updated: 2025/12/12 11:13:18 by sgil--de         ###   ########.fr       */
+/*   Updated: 2026/01/06 13:53:27 by sgil--de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ double	calculate_complexity(t_list *received)
 	mistake = 0.0;
 	total_pairs = 0.0;
 	tmp = received;
+	if (ft_lstsize(received) < 2)
+		return (0);
 	while (tmp)
 	{
 		if (tmp->next)
