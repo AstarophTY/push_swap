@@ -5,8 +5,9 @@ LIBS_DIR := libs
 
 NAME := push_swap
 BASE_NAME := main create_list parsing push swap rotate algorithme radix_sort utils chunk_sort chunk_utils selection_sort bench
+BONUS_NAME := main_bonus
 
-VPATH := $(SRCS_DIR):$(SRCS_DIR)/list:$(SRCS_DIR)/parsing:$(SRCS_DIR)/algorithme
+VPATH := $(SRCS_DIR):$(SRCS_DIR)/list:$(SRCS_DIR)/parsing:$(SRCS_DIR)/algorithme:$(SRCS_DIR)/checker
 SRCS := $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(BASE_NAME)))
 OBJS := $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(BASE_NAME)))
 DEPS := $(addprefix $(DEPS_DIR)/, $(addsuffix .d, $(BASE_NAME)))
