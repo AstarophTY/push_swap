@@ -31,12 +31,31 @@ static int	error(t_parsing **parsing_val, int error_id)
 	return (error_id);
 }
 
+static int	run_sort(t_parsing *parsing_val, t_list *lst)
+{
+	t_bench	bench;
+	double	disorder;
+	size_t	size;
+
+	init_bench(parsing_val->bench_state, &bench);
+	size = ft_lstsize(lst);
+	disorder = calculate_complexity(lst) * 100;
+	if (!is_sorted(lst))
+	{
+		if (size <= 3)
+			sort_small(&lst, &bench);
+		else
+			choose_algorithme(parsing_val->flag, &lst, disorder, &bench);
+	}
+	if (parsing_val->bench_state)
+		print_bench(parsing_val->flag, disorder, &bench);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list		*lst;
 	t_parsing	*parsing_val;
-	double		disorder;
-	t_bench		bench;
 
 	if (argc < 2)
 		return (1);
@@ -47,12 +66,7 @@ int	main(int argc, char **argv)
 	parsing_val->item_parse = NULL;
 	if (!lst)
 		return (error(&parsing_val, 3));
-	init_bench(parsing_val->bench_state, &bench);
-	disorder = calculate_complexity(lst) * 100;
-	if (!is_sorted(lst))
-		choose_algorithme(parsing_val->flag, &lst, disorder, &bench);
-	if (parsing_val->bench_state)
-		print_bench(parsing_val->flag, disorder, &bench);
+	run_sort(parsing_val, lst);
 	clean(parsing_val, lst);
 	return (0);
 }

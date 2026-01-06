@@ -71,6 +71,7 @@ bool	multi_swap(t_list *lst1, t_list *lst2, t_bench *bench);
 bool	is_sorted(t_list *lst);
 void	radix_sort(t_list **lst, t_bench *bench);
 void	chunk_sort(t_list **lst, t_bench *bench);
+void	sort_small(t_list **lst, t_bench *bench);
 
 void	init_bench(bool enabled, t_bench *bench);
 void	print_bench(t_flag flag, double disorder, t_bench *bench);
