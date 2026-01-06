@@ -60,5 +60,6 @@ dkms.conf
 .deps/
 push_swap_visualizer/
 checker_linux
+checker
 .vscode/
 args.txt
