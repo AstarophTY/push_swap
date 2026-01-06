@@ -32,7 +32,7 @@ static bool	is_valid_number(char *str)
 	return (true);
 }
 
-static void	process_flags(char **strs, t_parsing *parsing_val)
+static bool	process_flags(char **strs, t_parsing *parsing_val)
 {
 	int	i;
 
@@ -51,8 +51,11 @@ static void	process_flags(char **strs, t_parsing *parsing_val)
 			parsing_val->flag = adaptive;
 		else if (!ft_strcmp(strs[i], "--bench"))
 			parsing_val->bench_state = true;
+		else if (!is_valid_number(strs[i]))
+			return (false);
 		i++;
 	}
+	return (true);
 }
 
 static char	**merge_all_args(char **n_strs)
@@ -88,7 +91,8 @@ bool	parsing(t_parsing *parsing_val, char **strs)
 {
 	if (!parsing_val)
 		return (false);
-	process_flags(strs, parsing_val);
+	if (!process_flags(strs, parsing_val))
+		return (false);
 	parsing_val->item_parse = merge_all_args(strs);
 	if (!parsing_val->item_parse || !parsing_val->item_parse[0])
 	{
