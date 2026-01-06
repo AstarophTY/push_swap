@@ -22,20 +22,20 @@ void	clear_stacks(t_list **stack_a, t_list **stack_b)
 
 bool	has_duplicates(t_list *lst)
 {
-	t_list	*cursor;
-	t_list	*runner;
+	t_list	*current;
+	t_list	*temp;
 
-	cursor = lst;
-	while (cursor)
+	current = lst;
+	while (current)
 	{
-		runner = cursor->next;
-		while (runner)
+		temp = current->next;
+		while (temp)
 		{
-			if (runner->content == cursor->content)
+			if (temp->content == current->content)
 				return (true);
-			runner = runner->next;
+			temp = temp->next;
 		}
-		cursor = cursor->next;
+		current = current->next;
 	}
 	return (false);
 }

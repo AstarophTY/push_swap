@@ -32,7 +32,7 @@ static bool	is_number_format(const char *str)
 	return (true);
 }
 
-static bool	parse_int(const char *str, int *value)
+static bool	atoi_ptr(const char *str, int *value)
 {
 	long long	result;
 	int			sign;
@@ -61,12 +61,12 @@ static bool	parse_int(const char *str, int *value)
 	return (true);
 }
 
-static bool	process_token(t_list **stack_a, const char *token)
+static bool	process_lst(t_list **stack_a, const char *token)
 {
 	t_list	*node;
 	int		value;
 
-	if (!parse_int(token, &value))
+	if (!atoi_ptr(token, &value))
 		return (false);
 	node = ft_lstnew(value);
 	if (!node)
@@ -82,7 +82,7 @@ static bool	process_split(t_list **stack_a, char **splitted, bool *added)
 	cursor = 0;
 	while (splitted[cursor])
 	{
-		if (!process_token(stack_a, splitted[cursor++]))
+		if (!process_lst(stack_a, splitted[cursor++]))
 		{
 			free_split(splitted);
 			return (false);
