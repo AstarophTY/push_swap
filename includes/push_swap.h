@@ -44,8 +44,6 @@ typedef struct s_bench
 typedef struct s_parsing
 {
 	bool	bench_state;
-	bool	is_onestring;
-	int		str_index;
 	t_flag	flag;
 	char	**item_parse;
 }	t_parsing;
