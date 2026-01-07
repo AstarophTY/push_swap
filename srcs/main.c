@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	t_list		*lst;
 	t_parsing	*parsing_val;
 
-	if (argc < 2)
+	if (argc == 1)
 		return (1);
 	parsing_val = ft_calloc(1, sizeof(t_parsing));
 	if (!parsing_val || !parsing(parsing_val, &argv[1]))
