@@ -63,3 +63,4 @@ checker_linux
 checker
 .vscode/
 args.txt
+unitaire.sh
