@@ -46,6 +46,7 @@ typedef struct s_parsing
 	bool	bench_state;
 	t_flag	flag;
 	char	**item_parse;
+	bool	sucess;
 }	t_parsing;
 
 t_list	*create_list(char **array);

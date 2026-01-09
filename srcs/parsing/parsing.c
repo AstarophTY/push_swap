@@ -12,6 +12,21 @@
 
 #include "push_swap.h"
 
+static void	set_flags(t_parsing *parsing_val, t_flag flag, bool bench)
+{
+	static bool	set_flag;
+
+	if (bench && !parsing_val->bench_state)
+		parsing_val->bench_state = true;
+	else if (flag && !set_flag)
+	{
+		parsing_val->flag = flag;
+		set_flag = true;
+	}
+	else
+		parsing_val->sucess = false;
+}
+
 static bool	is_valid_number(char *str)
 {
 	int	i;
@@ -39,18 +54,19 @@ static bool	process_flags(char **strs, t_parsing *parsing_val)
 	i = 0;
 	parsing_val->flag = adaptive;
 	parsing_val->bench_state = false;
+	parsing_val->sucess = true;
 	while (strs[i])
 	{
 		if (!ft_strcmp(strs[i], "--simple"))
-			parsing_val->flag = simple;
+			set_flags(parsing_val, simple, false);
 		else if (!ft_strcmp(strs[i], "--medium"))
-			parsing_val->flag = medium;
+			set_flags(parsing_val, medium, false);
 		else if (!ft_strcmp(strs[i], "--complex"))
-			parsing_val->flag = complex;
+			set_flags(parsing_val, complex, false);
 		else if (!ft_strcmp(strs[i], "--adaptive"))
-			parsing_val->flag = adaptive;
+			set_flags(parsing_val, adaptive, false);
 		else if (!ft_strcmp(strs[i], "--bench"))
-			parsing_val->bench_state = true;
+			set_flags(parsing_val, 0, true);
 		else if (!is_valid_number(strs[i]))
 			return (false);
 		i++;
@@ -94,7 +110,8 @@ bool	parsing(t_parsing *parsing_val, char **strs)
 	if (!process_flags(strs, parsing_val))
 		return (false);
 	parsing_val->item_parse = merge_all_args(strs);
-	if (!parsing_val->item_parse || !parsing_val->item_parse[0])
+	if (!parsing_val->item_parse || !parsing_val->item_parse[0]
+		|| !parsing_val->sucess)
 	{
 		if (parsing_val->item_parse)
 			free_split(parsing_val->item_parse);
